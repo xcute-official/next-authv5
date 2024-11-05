@@ -1,0 +1,2 @@
+npx prisma migrate reset
+5:22:51
