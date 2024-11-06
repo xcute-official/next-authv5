@@ -25,7 +25,8 @@ const page = () => {
             i
             <p className='text-white text-lg'>A simple authentication service</p>
             <div>
-                <LoginButton>
+                {/* pass as Child if you pass mode === model else you will hydration error */}
+                <LoginButton asChild>
                     <Button variant="secondary" size={"lg"}>
                         SignIn
                     </Button>

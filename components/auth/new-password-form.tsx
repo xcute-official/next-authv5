@@ -44,6 +44,7 @@ export const NewPasswordForm = ()=>{
             password: '',
         }
     });
+    
     const onSubmit = (values: z.infer<typeof NewPasswordSchema>)=>{
         setError("");
         setSuccess("");
@@ -59,6 +60,7 @@ export const NewPasswordForm = ()=>{
             })
         })
     }
+
     return (
         <CardWrapper
             headerLabel="Enter a new password"
@@ -66,7 +68,7 @@ export const NewPasswordForm = ()=>{
             backButtonLabel="Back to login"
         >
             <Form {...form}>
-                <form className="space-y-6" onSubmit={form.handleSubmit(()=>{})}>
+                <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
                     <div className="space-y-4">
                         <FormField
                             control={form.control}

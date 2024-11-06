@@ -25,9 +25,9 @@ import { useSearchParams } from "next/navigation";
 
 export const LoginForm = ()=>{
 
-
-
+    
     const searchParams = useSearchParams();
+    const callbackUrl = searchParams.get('callbackUrl');
     const urlError = searchParams.get('error') === 'OAuthAccountNotLinked' ? "Email already in used with different provider" : "";
 
     const [showTwoFactor, setShowTwoFactor] = useState<boolean>(false);
@@ -40,14 +40,15 @@ export const LoginForm = ()=>{
         resolver: zodResolver(LoginSchema),
         defaultValues: {
             email: '',
-            password: ''
+            password: '',
+            code: ''
         }
     });
     const onSubmit = (values: z.infer<typeof LoginSchema>)=>{
         setError("");
         setSuccess("");
         startTransition(()=>{
-            login(values).then((data)=>{
+            login(values, callbackUrl).then((data)=>{
                 if(data?.error){
                     form.reset();
                     setError(data.error);
