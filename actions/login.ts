@@ -29,7 +29,7 @@ export const login = async (values: z.infer<typeof LoginSchema>, callbackUrl?: s
         const verificationToken = await generateVerificationToken(existingUser.email);
         await sendVerificationEmail(verificationToken.email, verificationToken.token);
         return {
-            success: "Confirmation email sent!"
+            success: "Verification email sent"
         }
     }
 
@@ -73,13 +73,14 @@ export const login = async (values: z.infer<typeof LoginSchema>, callbackUrl?: s
                 }
             });
         }else{
+            
             const twoFactorToken = await generateTwoFactorToken(existingUser.email);
             console.log("Two factor token: ", twoFactorToken);
             await sendTwoFactorTokenEmail(
                 twoFactorToken.email,
                 twoFactorToken.token
             );
-            return {twoFactor: true}
+            return {twoFactor: true, success: "2FA checks"}
         }
     }
 
